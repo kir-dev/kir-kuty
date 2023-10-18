@@ -4,11 +4,12 @@ const b1  = document.getElementById("b1");
 const b2  = document.getElementById("b2");
 const b3  = document.getElementById("b3");
 const b4  = document.getElementById("b4");
+const bnext = document.getElementById("next");
 const buttons = [b1,b2,b3,b4];
 
 const res = document.getElementById("resultText");
 
-var correctButton = Math.floor(Math.random(465) * buttons.length);
+var correctButton = Math.floor(Math.random() * buttons.length);
 
 const httpStatusCodes = [
     100, 101, 200, 201, 202, 204,
@@ -30,34 +31,49 @@ const httpStatusNames = [
     "Gateway Timeout", "HTTP Version Not Supported"
 ];
 
-vote(0);
+
+
+next();
+
+
 
 function vote(voting){
+    if (voting > 4 || voting < 0) return;
 
-    console.log(correctButton + " // " + (voting -1));
-
-    if(correctButton === voting-1 || voting === 0){
-        res.innerHTML = "Helyes";
+    if(correctButton === voting-1){
+        buttons[correctButton].style.borderColor = "green";
+        buttons[correctButton].style.backgroundColor = "rgba(1,255,1,0.3)";
     } else {
-        res.innerHTML = "Helytelen";
+        buttons[correctButton].style.borderColor = "green";
+        buttons[correctButton].style.backgroundColor = "rgba(1,255,1,0.3)";
+        buttons[voting-1].style.borderColor = "red";
+        buttons[voting-1].style.backgroundColor = "rgba(255,1,1,0.3)";
     }
 
+    bnext.style.display = "inline-block";
 
-    //gen New
+    buttons.forEach((item) => {
+        item.disabled = true;
+    });
+}
+
+function next(){
+    bnext.style.display = "none";
+
+    buttons.forEach((item) => {
+        item.style.borderColor = "black";
+        item.style.backgroundColor ="white";
+        item.disabled = false;
+    });
+
     correctButton = Math.floor(Math.random() * buttons.length);
-    const curRandom  = Math.floor(Math.random(789) * httpStatusCodes.length);
+    const curRandom  = Math.floor(Math.random() * httpStatusCodes.length);
     const curRandomCode = httpStatusCodes[curRandom];
     const curRandomName = httpStatusNames[curRandom];
-    console.log(correctButton);
-    console.log(curRandomName);
-    console.log(curRandomCode);
 
     img.src = "https://http.dog/"+curRandomCode+".jpg";
 
-    // Create an array to keep track of used indexes
-    const usedIndexes = [curRandomName];
-
-    function getRandomUniqueStatusName() {
+    function getRandomUniqueStatus() {
         let randomIndex;
         do {
             randomIndex = Math.floor(Math.random() * httpStatusNames.length);
@@ -67,13 +83,20 @@ function vote(voting){
         return httpStatusNames[randomIndex]; // Return the corresponding status name
     }
 
-    for (let i = 0; i < buttons.length; i++) {
-        if(correctButton === i)
-            buttons[correctButton].innerHTML = curRandomName;
-        else
-            buttons[i].innerHTML = getRandomUniqueStatusName();
+    function setButtonLabels(curRandomName) {
+        for (let i = 0; i < buttons.length; i++) {
+            if (correctButton === i)
+                buttons[correctButton].innerHTML = curRandomName;
+            else
+                buttons[i].innerHTML = getRandomUniqueStatus();
+        }
     }
 
+    // Create an array to keep track of used indexes
+    const usedIndexes = [curRandomName];
+
+    // Generate and set button labels
+    setButtonLabels(curRandomName);
 
 
 }

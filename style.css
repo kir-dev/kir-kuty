@@ -9,39 +9,51 @@ body{
     padding: 0;
     margin: 0;
 }
-table{
-    width: 100%;
-    height: 100%;
-}
-tr, td{
-    border: 1px dashed black;
-    margin: 0;
-    padding: 0;
-}
 .sidebar{
     width: 25%;
     overflow-x: hidden;
 }
 img{
-    width: 45rem;
+    width: 50rem;
     display: block;
     margin: 0 auto;
     overflow-y: hidden;
 }
 h1{
-    font-family: Bahnschrift;
+    font-family: Bahnschrift, serif;
+    text-align: left;
     margin-left: 20px;
 }
 h2{
     width: 100%;
     text-align: center;
-    font-family: Bahnschrift;
+    font-family: Bahnschrift, serif;
 }
 .orange{
-    color: darkorange;
+    color: rgb(241, 90, 41);
 }
 .relative{
     position: relative;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-content {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+.sidebar {
+    flex: 1;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 3;
 }
 .censored{
     z-index: 1;
@@ -49,16 +61,15 @@ h2{
     position: absolute;
     bottom: 1rem;
     height: 3rem;
-    width: 44rem;
-    left: 31rem;
+    width: 50rem;
     text-align: center;
-    font-family: Bahnschrift;
+    font-family: Bahnschrift, serif;
     color: white;
 }
 .center{
     width: fit-content;
     display: block;
-    margin: 2rem auto;
+    margin: 1rem auto;
 }
 button{
     font-size: 20px;
@@ -66,37 +77,17 @@ button{
     background: none;
     border-radius: 10px;
     border: 3px solid black;
-    font-family: Bahnschrift;
+    font-family: Bahnschrift, serif;
+    display: inline-block;
+}
+button:disabled{
+    color: black;
+    border-color: black;
 }
 button:hover{
-    border: 3px solid darkorange;
+    border: 3px solid rgb(241, 90, 41);
 }
-
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-
-.main-content {
-    display: flex;
-    flex: 1;
-    width: 100%;
-}
-
-.sidebar {
-    flex: 1;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 3;
-}
-
-img {
-    width: 45rem;
+#next{
+    position: absolute;
+    right: 2rem;
 }
